@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>PandaPlunk Soundboard</title>
+	<style type="text/css" media="screen">
+	   button {
+	       -moz-border-radius: 5px;
+	       background: grey;
+	       border: 2px dotted black;
+	       display: inline-block;
+	       cursor: pointer;
+	       padding: 5px 5px;
+	       margin: 5px;
+		   color:white;
+		   width:80px;
+		   height:80px;
+		   float:left;
+	   }
+		audio{
+			position:absolute;
+			left:-2000px;
+		}
+	   html {
+	       background: url(bg.jpg) no-repeat center center fixed;
+	   }
+		#doc{
+			background-color: rgba(0,0,0,0.5);
+			min-height:700px;
+		}
+		#grp1{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#grp2{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#grp3{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#grp4{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#grp5{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#grp6{ width:180px;	height:500px; float:left; margin:5px; padding:5px;}
+		#controls{ width:180px;	height:90px; position:absolute; right:15px; bottom:60px;}
+	   h1 {
+	       color: black;
+	   }
+	</style>
+
+
+</head>
+<body>
+    <div id="doc">
+        <!-- JS here to prevent 'flash' of all the default audio players -->
+        <script src="jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+           $(function() {
+                $("audio").removeAttr("controls").each(function(i, audioElement) {
+                    var audio = $(this);
+                    var that = this; //closure to keep reference to current audio tag
+					
+					var klasse = audio.attr("class");
+					
+					if(klasse){//place button in right div
+						$("#doc #"+klasse ).append($('<button>'+audio.attr("title")+'</button>').click(function() {
+							
+							var buttonPressed =  $(this);//for coloring the button after playing
+							
+							$(this).css('border-color','blue');
+							that.play()//play sound on click
+							that.addEventListener("ended", function() {//if playing end..
+								buttonPressed.css('border-color','black');//change color button back
+							});
+						}));
+					}
+					else{//these buttons have no div
+						$("#doc").append($('<button>'+audio.attr("title")+'</button>').click(function() {
+							var buttonPressed =  $(this);//for coloring the button after playing
+							
+							$(this).css('border-color','blue');
+							that.play()//play sound on click
+							that.addEventListener("ended", function() {//if playing end..
+								buttonPressed.css('border-color','black');//change color button back
+							});
+						}));
+					}
+                });
+				
+				var loop = false;//loop register
+				
+				$("#loop").click(function() {//pressed on loop-button
+
+					if(loop==false){//loop is not activated.. 
+						$("audio").each(function( index ) {//..so -> activate
+								$(this).load();
+								$(this).attr('loop','loop');
+						});
+						$("#loop").css("background-color","red");//change loop-button color
+						$("#loop").text("LOOPING");//change loop-button text
+						loop=true;//set register
+					}
+					else{//loop has been activated before...
+						$("audio").each(function( index ) {//..so -> deactivate loop
+						  $(this).removeAttr("loop");
+						});
+						$("#loop").css("background-color","");//change loop-button color back
+						$("#loop").text("LOOP");//change loop-button text back
+						loop=false;//reset register
+					}
+					
+				});
+				
+				var mute = false;//mute register
+				
+				$("#mute").click(function() {//pressed on mute-button
+
+					if(mute==false){//mute is not activated..
+						$("audio").each(function() {//..so activate
+						  $(this).attr('volume','0');
+						});
+						$("#mute").css("background-color","red");//change mute-button color
+						$("#mute").text("MUTED");//change mute-button text
+						mute=true;//set register
+					}
+					else if(mute==true){//loop has been activated before...
+						$("audio").each(function() {//..so deactivate mute (=volume to 1)
+						  $(this).attr('volume','1');
+						});
+						$("#mute").css("background-color","");//change mute-button color back
+						$("#mute").text("MUTE");//change mute-button text back
+						mute=false;//reset register
+					}
+					
+				});				
+				
+				
+				
+            });
+        </script>
+		
+		<div id="grp1"></div>
+		<div id="grp2"></div>
+		<div id="grp3"></div>
+		<div id="grp4"></div>
+		<div id="grp5"></div>
+		<div id="grp6"></div>
+		
+								<audio src="clips/annerose.mp3" controls autobuffer="true" title="annerose" class="grp1"></audio>
+								<audio src="clips/lucasendaan.mp3" controls autobuffer="true" title="lucasendaan" class="grp1"></audio>	
+								<audio src="clips/heinhein!.mp3" controls autobuffer="true" title="heinhein!" class="grp1"></audio>
+
+						<audio src="clips/gitaar.mp3" controls autobuffer="true" title="gitaar" class="grp4"></audio>
+                                                    <audio src="clips/piano.mp3" controls autobuffer="true" title="piano" class="grp4"></audio>
+								<audio src="clips/alarm.mp3" controls autobuffer="true" title="alarm" class="grp4"></audio>
+                                                                <audio src="clips/hoorn.mp3" controls autobuffer="true" title="hoorn" class="grp4"></audio>
+                                                                
+                                                                <audio src="clips/hein.mp3" controls autobuffer="true" title="hein" class="grp2"></audio>
+								<audio src="clips/anneroos.mp3" controls autobuffer="true" title="anneroos" class="grp2"></audio>	
+								<audio src="clips/charlotte.mp3" controls autobuffer="true" title="charlotte" class="grp2"></audio>
+								<audio src="clips/daan.mp3" controls autobuffer="true" title="daan" class="grp2"></audio>
+								<audio src="clips/lucas.mp3" controls autobuffer="true" title="lucas" class="grp2"></audio>
+
+								<audio src="clips/datklinktalgoed.mp3" controls autobuffer="true" title="datklinktalgoed" class="grp3"></audio>
+								<audio src="clips/goedemorgen.mp3" controls autobuffer="true" title="goedemorgen" class="grp6"></audio>
+								<audio src="clips/goedgedaan.mp3" controls autobuffer="true" title="goedgedaan" class="grp3"></audio>
+								<audio src="clips/ikhouookvanjou.mp3" controls autobuffer="true" title="ikhouookvanjou" class="grp3"></audio>
+								<audio src="clips/ohmaarnatuurlijkvervormd.mp3" controls autobuffer="true" title="ohmaarnatuurlijk" class="grp3"></audio>
+                                                                <audio src="clips/slaaplekker.mp3" controls autobuffer="true" title="slaaplekker" class="grp6"></audio>
+								<audio src="clips/watergvoorje.mp3" controls autobuffer="true" title="watergvoorje" class="grp3"></audio>
+                                                                
+                                                              
+								<audio src="clips/wiedoetdeafwas.mp3" controls autobuffer="true" title="wiedoetdeafwas" class="grp3"></audio>
+								<audio src="clips/welterusten.mp3" controls autobuffer="true" title="welterusten" class="grp6"></audio>
+								<audio src="clips/watziejeerleukuitvanavond.mp3" controls autobuffer="true" title="leuk uitzien" class="grp3"></audio>
+								<audio src="clips/ruimjedatnogevenop.mp3" controls autobuffer="true" title="ruimjedatnogevenop" class="grp3"></audio>
+								<audio src="clips/lekkergekookt....mp3" controls autobuffer="true" title="lekkergekookt..." class="grp3"></audio>
+								<audio src="clips/jalekker.mp3" controls autobuffer="true" title="jalekker" class="grp3"></audio>
+								<audio src="clips/ikzalueenverwijsbriefgeven.mp3" controls autobuffer="true" title="verwijsbrief" class="grp5"></audio>
+								<audio src="clips/ikzaleensevenkijken.mp3" controls autobuffer="true" title="even kijken" class="grp5"></audio>
+								<audio src="clips/heeftuhierallanglastvan.mp3" controls autobuffer="true" title="al lang last" class="grp5"></audio>
+								<audio src="clips/goedeavond.mp3" controls autobuffer="true" title="goedeavond" class="grp6"></audio>
+								<audio src="clips/datruiktlekker!.mp3" controls autobuffer="true" title="datruiktlekker" class="grp3"></audio>
+								<audio src="clips/dankjewel.mp3" controls autobuffer="true" title="dankjewel" class="grp3"></audio>
+
+                                                                
+                                                                
+<!--								<audio src="clips/juichen.mp3" controls autobuffer="true" title="juichen" class="grp4"></audio>
+								<audio src="clips/airhorn.mp3" controls autobuffer="true" title="airhorn" class="grp4"></audio>
+								<audio src="clips/i feel good.mp3" controls autobuffer="true" title="I feel good" class="grp4"></audio>
+								<audio src="clips/oelala.mp3" controls autobuffer="true" title="oelala" class="grp4"></audio>
+								<audio src="clips/overgeven.mp3" controls autobuffer="true" title="overgeven" class="grp2"></audio>
+								<audio src="clips/gutemittag.mp3" controls autobuffer="true" title="gutemittag" class="grp3"></audio>
+								<audio src="clips/uw CVBer is.mp3" controls autobuffer="true" title="uw CVBer is" class="grp6"></audio>
+								<audio src="clips/luuk.mp3" controls autobuffer="true" title="Luuk" class="grp6"></audio>
+								<audio src="clips/lore.mp3" controls autobuffer="true" title="Lore" class="grp6"></audio>
+								<audio src="clips/raymond.mp3" controls autobuffer="true" title="Raymond" class="grp6"></audio>
+								<audio src="clips/sal.mp3" controls autobuffer="true" title="Sal" class="grp6"></audio>
+								<audio src="clips/jaike.mp3" controls autobuffer="true" title="Jaike" class="grp6"></audio>
+								<audio src="clips/joren.mp3" controls autobuffer="true" title="Joren" class="grp6"></audio>
+								<audio src="clips/beelen.mp3" controls autobuffer="true" title="Beelen" class="grp6"></audio>
+								<audio src="clips/laurens.mp3" controls autobuffer="true" title="Laurens" class="grp6"></audio>
+								<audio src="clips/bianca.mp3" controls autobuffer="true" title="Bianca" class="grp6"></audio>
+								<audio src="clips/karel.mp3" controls autobuffer="true" title="Karel" class="grp6"></audio>
+								<audio src="clips/beer op bamb.mp3" controls autobuffer="true" title="Beer op Bamb" class="grp2"></audio>
+								<audio src="clips/hou jij van kip.mp3" controls autobuffer="true" title="Hou jij van kip" class="grp2"></audio>
+								<audio src="clips/rug naar de bar.mp3" controls autobuffer="true" title="rug naar de bar" class="grp2"></audio>
+								<audio src="clips/right in the pussy.mp3" controls autobuffer="true" title="Right in the pussy" class="grp2"></audio>
+								<audio src="clips/panda.mp3" controls autobuffer="true" title="Panda" class="grp5"></audio>
+								<audio src="clips/plunk.mp3" controls autobuffer="true" title="Plunk" class="grp5"></audio>
+								<audio src="clips/opeens heb je het.mp3" controls autobuffer="true" title="opeens heb je het" class="grp3"></audio>
+								<audio src="clips/meest volzijdige stukje kip.mp3" controls autobuffer="true" title="meest volzijdige stukje kip" class="grp4"></audio>
+								<audio src="clips/kip is niet wat je denkt.mp3" controls autobuffer="true" title="kip is niet wat je denkt" class="grp4"></audio>
+								<audio src="clips/hide kids hide wife.mp3" controls autobuffer="true" title="hide kids hide wife" class="grp4"></audio>
+								<audio src="clips/over 9000.mp3" controls autobuffer="true" title="over 9000" class="grp4"></audio>
+								<audio src="clips/formidable.mp3" controls autobuffer="true" title="formidable" class="grp4"></audio>								
+								<audio src="clips/romana op de scooter.mp3" controls autobuffer="true" title="romana op de scooter" class="grp1"></audio>								
+								<audio src="clips/stukje rijden.mp3" controls autobuffer="true" title="stukje rijden" class="grp1"></audio>								
+								<audio src="clips/zal wel niet lukken.mp3" controls autobuffer="true" title="zal wel niet lukken" class="grp1"></audio>								
+								<audio src="clips/onder de douche marloes.mp3" controls autobuffer="true" title="onder de douche marloes" class="grp1"></audio>								
+	-->
+		<div id="controls"><button id="mute">MUTE</button><button id="loop">LOOP</button></div>
+	</div>
+
+</body>
+</html>
